@@ -19,6 +19,8 @@ if (!token) {
     throw new Error("Missing TOKEN in environment variables");
 }
 
+console.log("TOKEN FROM RAILWAY:", process.env.TOKEN);
+
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
