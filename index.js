@@ -15,6 +15,10 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 });
 
+if (!token) {
+    throw new Error("Missing TOKEN in environment variables");
+}
+
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
