@@ -55,6 +55,32 @@ https://docs.google.com/spreadsheets/d/1L5HoLr-Ipir7SZpQJVwT1l2hdN0f-BDUVg8upYLC
             ephemeral: false
         });
     }
+
+    if (interaction.commandName === 'telefon') {
+        const navn = interaction.options.getString('navn');
+        const nummer = interaction.options.getString('nummer');
+
+        const channel = await client.channels.fetch(CHANNEL_ID);
+
+        const { EmbedBuilder } = require('discord.js');
+
+        const embed = new EmbedBuilder()
+            .setTitle('📱 Telefon register')
+            .setDescription(
+                `**Navn:** ${navn}\n` +
+                `**Nummer:** ${nummer}`
+            )
+            .setColor(0x5865F2)
+            .setFooter({ text: `Tilføjet af ${interaction.user.username}` })
+            .setTimestamp();
+
+        await channel.send({ embeds: [embed] });
+
+        await interaction.reply({
+            content: '✅ Nummer gemt!',
+            ephemeral: true
+        });
+    }
 });
 
 const commands = [
@@ -70,7 +96,16 @@ const commands = [
 
     new SlashCommandBuilder()
         .setName('dokumenter')
-        .setDescription('Vis Flames dokumenter')
+        .setDescription('Vis Flames dokumenter'),
+
+    new SlashCommandBuilder()
+        .setName('telefon')
+        .setDescription('Tilføj et telefonnummer')
+        .addStringOption(opt =>
+            opt.setName('navn').setDescription('Navn').setRequired(true))
+        .addStringOption(opt =>
+            opt.setName('nummer').setDescription('Telefonnummer (xx xx xx xx)').setRequired(true))
+
 ].map(c => c.toJSON());
 
 
