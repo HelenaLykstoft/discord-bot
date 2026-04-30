@@ -15,7 +15,7 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 });
 
-if (!token) {
+if (!TOKEN) {
     throw new Error("Missing TOKEN in environment variables");
 }
 
