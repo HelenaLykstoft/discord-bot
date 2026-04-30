@@ -40,6 +40,21 @@ client.on('interactionCreate', async interaction => {
 
         await interaction.reply({ content: '✅ Sendt!', ephemeral: true });
     }
+
+    if (interaction.commandName === 'dokumenter') {
+
+        await interaction.reply({
+            content:
+                `🔥 **Flames dokumenter!**
+
+📊 Flames sheets:
+https://docs.google.com/spreadsheets/d/1zBreMg2c8WL0YU9uzjr7K-TqKe6_zZLdqFWqdEDvvIY/edit?usp=sharing
+
+📈 Flames KD sheet:
+https://docs.google.com/spreadsheets/d/1L5HoLr-Ipir7SZpQJVwT1l2hdN0f-BDUVg8upYLCVdY/edit?usp=sharing`,
+            ephemeral: false
+        });
+    }
 });
 
 const commands = [
@@ -58,21 +73,6 @@ const commands = [
         .setDescription('Vis Flames dokumenter')
 ].map(c => c.toJSON());
 
-
-if (interaction.commandName === 'dokumenter') {
-
-    await interaction.reply({
-        content:
-            `🔥 **Flames dokumenter!**
-
-📊 Flames sheets:
-https://docs.google.com/spreadsheets/d/1zBreMg2c8WL0YU9uzjr7K-TqKe6_zZLdqFWqdEDvvIY/edit?usp=sharing
-
-📈 Flames KD sheet:
-https://docs.google.com/spreadsheets/d/1L5HoLr-Ipir7SZpQJVwT1l2hdN0f-BDUVg8upYLCVdY/edit?usp=sharing`,
-        ephemeral: false
-    });
-}
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
