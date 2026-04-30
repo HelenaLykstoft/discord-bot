@@ -9,7 +9,8 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 const CLIENT_ID = '1497714649611763752';
 const GUILD_ID = '1497301652758073354';
-const CHANNEL_ID = '1498701080270213120';
+const CHANNEL_ID_INDBETALING = '1498701080270213120';
+const CHANNEL_ID_TELEFON = '1497707275299586058';
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
@@ -29,7 +30,7 @@ client.on('interactionCreate', async interaction => {
         const beskrivelse = interaction.options.getString('beskrivelse');
         const beløb = interaction.options.getInteger('beløb');
 
-        const channel = await client.channels.fetch(CHANNEL_ID);
+        const channel = await client.channels.fetch(CHANNEL_ID_INDBETALING);
 
         await channel.send(
             `Bruger: ${interaction.user.username} | ` +
@@ -60,7 +61,7 @@ https://docs.google.com/spreadsheets/d/1L5HoLr-Ipir7SZpQJVwT1l2hdN0f-BDUVg8upYLC
         const navn = interaction.options.getString('navn');
         const nummer = interaction.options.getString('nummer');
 
-        const channel = await client.channels.fetch(CHANNEL_ID);
+        const channel = await client.channels.fetch(CHANNEL_ID_TELEFON);
 
         const { EmbedBuilder } = require('discord.js');
 
