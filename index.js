@@ -28,7 +28,21 @@ client.on('interactionCreate', async interaction => {
     if (interaction.commandName === 'indbetaling') {
         const kommentar = interaction.options.getString('kommentar');
         const beskrivelse = interaction.options.getString('beskrivelse');
-        const beløb = interaction.options.getInteger('beløb');
+        let beløb = interaction.options.getString('beløb');
+
+        // Fjern mellemrum og evt. +
+        beløb = beløb.replace(/\s+/g, '').replace('+', '');
+
+        // Konverter til tal
+        beløb = parseInt(beløb);
+
+        // Tjek om det er et gyldigt tal
+        if (isNaN(beløb)) {
+            return interaction.reply({
+                content: '❌ Ugyldigt beløb!',
+                ephemeral: true
+            });
+        }
 
         const channel = await client.channels.fetch(CHANNEL_ID_INDBETALING);
 
@@ -92,8 +106,8 @@ const commands = [
             opt.setName('kommentar').setDescription('Kommentar').setRequired(true))
         .addStringOption(opt =>
             opt.setName('beskrivelse').setDescription('Beskrivelse').setRequired(true))
-        .addIntegerOption(opt =>
-            opt.setName('beløb').setDescription('Beløb').setRequired(true)),
+        .addStringOption(opt =>
+            opt.setName('beløb').setDescription('Beløb ( + eller - foran)').setRequired(true)),
 
     new SlashCommandBuilder()
         .setName('dokumenter')
